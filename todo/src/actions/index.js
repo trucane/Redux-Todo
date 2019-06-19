@@ -7,10 +7,10 @@ export const addTodo = (value) =>{
 }
 
 export const Delete_To_Do = 'DeleteTodo';
-export const deleteItem = (todo) =>{
+export const deleteItem = (id) =>{
     return{
         type:Delete_To_Do,
-        payload:todo
+        payload:id
     }
 }
 
@@ -23,9 +23,9 @@ export const deleteAll = (todo) =>{
 }
 
 export const Toggle_To_Do = 'ToggleTodo';
-export const toggleComplete = (index) =>{
+export const toggleComplete = (id) =>{
     return {
         type:Toggle_To_Do,
-        payload:index
+        payload:id
     }
 }

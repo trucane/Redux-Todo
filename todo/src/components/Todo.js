@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addTodo, deleteItem, toggleComplete, deleteAll} from '../actions'
+import '../App.css'
 
 
 
@@ -13,7 +14,6 @@ class Todo extends React.Component{
     
   
 handleChange = (e) =>{
-    //console.log(this.props.state)
     this.setState({
         item: e.target.value
     })
@@ -30,49 +30,85 @@ addItem = (e) =>{
     }
 }
 
-deleteTodo = (todo, e) =>{
+deleteTodo = (id, e) =>{
     e.preventDefault()
-    const trying = this.props.todoList.filter(res => res.name !== todo.name);
-    this.props.deleteItem(trying)
+    this.props.deleteItem(id)
 }
 
 deleteAllCompleted = (e) =>{
     e.preventDefault()
-    this.props.deleteAll();
+    const available = this.props.todoList.filter(res => res.completed === true)
+    if(available.length > 0){
+        this.props.deleteAll();
+    }
 }
 
-handleToggle = (e, index) =>{
+handleToggle = (e, id) =>{
     e.preventDefault();
-    this.props.toggleComplete(index)
+    this.props.toggleComplete(id)
 
 }
 
     render(){
         return(
-            <div>
-                <form onSubmit={this.addItem}>
-                    <input 
-                        name="item" 
-                        placeholder="add todo"
-                        onChange={this.handleChange}
-                        type="text"
-                        value={this.state.item}
+            <div className="App">
+                <div className="App-header">
+                    <form onSubmit={this.addItem}>
+                        <input 
+                            name="item" 
+                            placeholder="add todo"
+                            onChange={this.handleChange}
+                            type="text"
+                            value={this.state.item}
 
-                        />
+                            />
 
-                    <button >Add to do</button>
-                </form>
+                        <button>Add to do</button>
+                    </form>
+                </div>
 
-                <h4><button onClick={(e) => this.deleteAllCompleted(e)}>Delete All Completed</button> </h4>
+                <div className="App-body">
+                    <div className="task-container">
 
-                <ul>
-                    {this.props.todoList.map( (todo, index) =>(
-                     <li key={todo.id} onClick={(e) => this.handleToggle(e, index)}> 
-                            <span style ={{textDecoration: todo.completed ? 'line-through': 'none'}}>{todo.name}</span>
-                            <button onClick={(e) => this.deleteTodo(todo, e)}>x</button>
-                        </li>
-                    ))}
-                </ul>
+                        <h4>In Progress</h4>
+                        <ul>
+                        { 
+                            
+                            this.props.todoList.map( (todo, index) =>{
+
+                                if(todo.completed === false){
+
+                                    return <li key={index} onClick={(e) => this.handleToggle(e, todo.id)}>
+                                                <div className="task task-progress">
+                                                    <span>{todo.name}</span>
+                                                </div>
+                                            </li>
+                
+                                    
+                                }
+                            }) 
+                        }
+                        </ul>
+                    </div>
+
+
+                    <div className="task-container">
+                        <h4>Completed <button className="addbutton" onClick={(e) => this.deleteAllCompleted(e)}><small>Del All</small></button> </h4>
+                        <ul>
+                            {this.props.todoList.map( (todo, index) =>{
+                                if(todo.completed === true){
+
+                                    return <li key={index} onClick={(e) => this.handleToggle(e, index)}>
+                                                <div className="task task-completed">
+                                                    <span>{todo.name}</span>
+                                                    <button onClick={(e) => this.deleteTodo(todo.id, e)}>x</button>
+                                                </div>
+                                            </li>
+                                }}) 
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
         )
     }

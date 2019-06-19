@@ -10,6 +10,7 @@ const initialState = {
 
 export default (state = initialState, action) =>{
     switch(action.type){
+
         case Add_To_Do:
         const newTODO = {id:Date.now(), name:action.payload, completed:false};
         return{
@@ -17,18 +18,19 @@ export default (state = initialState, action) =>{
             todoList:[...state.todoList,newTODO]
         };
 
-        case Delete_To_Do:
 
+        case Delete_To_Do:
+            const newToDo = state.todoList.filter(todos => todos.id !== action.payload);
         return{
-                todoList:action.payload
+                todoList:newToDo
         };
 
         case Toggle_To_Do:
             return{
                 ...state,
 
-                todoList:state.todoList.map((todo, index) =>{
-                    if(action.payload === index){
+                todoList:state.todoList.map((todo) =>{
+                    if(action.payload === todo.id){
                         return{
                             ...todo,
                             completed:!todo.completed
@@ -42,7 +44,6 @@ export default (state = initialState, action) =>{
 
         case Delete_All:
             const all = state.todoList.filter(res => res.completed === false)
-            console.log(all)
             return{
                 ...state,
                 todoList:all
