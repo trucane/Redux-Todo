@@ -4,6 +4,15 @@ import {addTodo, deleteItem, toggleComplete, deleteAll} from '../actions'
 import '../App.css'
 
 
+// Task to complete:
+// 1. Add local storage to persist data
+// 2. Create component for todo cards for DRY coding
+// 2.5 Add Protypes to for checking data types
+// 3. Refactor CSS to SASS files
+// 4. Create HOS componets for buttons
+// 5 Create draggable functionality to trash todo task
+
+
 
 
 class Todo extends React.Component{
