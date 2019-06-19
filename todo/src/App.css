@@ -31,6 +31,22 @@ ul, ol{
   background-color: #282c34;
 }
 
+.App-header input {
+  padding:5px;
+  border:none;
+}
+
+.App-header button {
+  padding:5px;
+  border:none;
+  background:white;
+  color:cadetblue;
+}
+
+.App-header button:hover {
+  color:blue;
+}
+
 .addbutton {
   margin-left:20px;
   background:none;

@@ -11,6 +11,7 @@ import '../App.css'
 // 3. Refactor CSS to SASS files
 // 4. Create HOS componets for buttons
 // 5 Create draggable functionality to trash todo task
+// 6 Add "Mark Urgent functionality"
 
 
 
@@ -72,7 +73,7 @@ handleToggle = (e, id) =>{
 
                             />
 
-                        <button>Add to do</button>
+                        <button>Submit</button>
                     </form>
                 </div>
 
@@ -82,14 +83,13 @@ handleToggle = (e, id) =>{
                         <h4>In Progress</h4>
                         <ul>
                         { 
-                            
-                            this.props.todoList.map( (todo, index) =>{
+                            this.props.todoList.map( (todo) =>{
 
                                 if(todo.completed === false){
 
-                                    return <li key={index} onClick={(e) => this.handleToggle(e, todo.id)}>
+                                    return <li key={todo.id}>
                                                 <div className="task task-progress">
-                                                    <span>{todo.name}</span>
+                                                    <span onClick={(e) => this.handleToggle(e, todo.id)}>{todo.name}</span>
                                                 </div>
                                             </li>
                 
@@ -104,10 +104,10 @@ handleToggle = (e, id) =>{
                     <div className="task-container">
                         <h4>Completed <button className="addbutton" onClick={(e) => this.deleteAllCompleted(e)}><small>Del All</small></button> </h4>
                         <ul>
-                            {this.props.todoList.map( (todo, index) =>{
+                            {this.props.todoList.map( (todo) =>{
                                 if(todo.completed === true){
 
-                                    return <li key={index} onClick={(e) => this.handleToggle(e, index)}>
+                                    return <li key={todo.id} onClick={(e) => this.handleToggle(e, todo.id)}>
                                                 <div className="task task-completed">
                                                     <span>{todo.name}</span>
                                                     <button onClick={(e) => this.deleteTodo(todo.id, e)}>x</button>

@@ -12,17 +12,17 @@ export default (state = initialState, action) =>{
     switch(action.type){
 
         case Add_To_Do:
-        const newTODO = {id:Date.now(), name:action.payload, completed:false};
+        const newToDO = {id:Date.now(), name:action.payload, completed:false};
         return{
             ...state,
-            todoList:[...state.todoList,newTODO]
+            todoList:[...state.todoList,newToDO]
         };
 
 
         case Delete_To_Do:
             const newToDo = state.todoList.filter(todos => todos.id !== action.payload);
         return{
-                todoList:newToDo
+                todoList:newToDo,
         };
 
         case Toggle_To_Do:
