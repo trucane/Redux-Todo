@@ -1,4 +1,4 @@
-import {Add_To_Do, Delete_To_Do} from '../actions'
+import {Add_To_Do, Delete_To_Do, Toggle_To_Do} from '../actions'
 
 const initialState = {
     todoList:[
@@ -19,8 +19,25 @@ export default (state = initialState, action) =>{
 
         case Delete_To_Do:
 
+        return{
+                todoList:action.payload
+        };
+
+        case Toggle_To_Do:
             return{
-                 todoList:action.payload
+                ...state,
+
+                todoList:state.todoList.map((todo, index) =>{
+                    if(action.payload === index){
+                        return{
+                            ...todo,
+                            completed:!todo.completed
+                        };
+                    }else{
+                        return todo
+                    }
+                })
+                
             }
 
         default:

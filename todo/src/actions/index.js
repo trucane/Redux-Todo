@@ -13,3 +13,11 @@ export const deleteItem = (todo) =>{
         payload:todo
     }
 }
+
+export const Toggle_To_Do = 'ToggleTodo';
+export const toggleComplete = (index) =>{
+    return {
+        type:Toggle_To_Do,
+        payload:index
+    }
+}
