@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addTodo, deleteItem, toggleComplete} from '../actions'
+import {addTodo, deleteItem, toggleComplete, deleteAll} from '../actions'
 
 
 
@@ -36,6 +36,11 @@ deleteTodo = (todo, e) =>{
     this.props.deleteItem(trying)
 }
 
+deleteAllCompleted = (e) =>{
+    e.preventDefault()
+    this.props.deleteAll();
+}
+
 handleToggle = (e, index) =>{
     e.preventDefault();
     this.props.toggleComplete(index)
@@ -57,6 +62,9 @@ handleToggle = (e, index) =>{
 
                     <button >Add to do</button>
                 </form>
+
+                <h4><button onClick={(e) => this.deleteAllCompleted(e)}>Delete All Completed</button> </h4>
+
                 <ul>
                     {this.props.todoList.map( (todo, index) =>(
                      <li key={todo.id} onClick={(e) => this.handleToggle(e, index)}> 
@@ -79,4 +87,4 @@ const mapStateToProps = (state) =>{
 }
 
 
-export default connect(mapStateToProps, {addTodo,deleteItem,toggleComplete})(Todo)
+export default connect(mapStateToProps, {addTodo,deleteItem,toggleComplete, deleteAll})(Todo)

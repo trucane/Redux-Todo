@@ -1,4 +1,4 @@
-import {Add_To_Do, Delete_To_Do, Toggle_To_Do} from '../actions'
+import {Add_To_Do, Delete_To_Do, Toggle_To_Do, Delete_All} from '../actions'
 
 const initialState = {
     todoList:[
@@ -38,6 +38,14 @@ export default (state = initialState, action) =>{
                     }
                 })
                 
+            }
+
+        case Delete_All:
+            const all = state.todoList.filter(res => res.completed === false)
+            console.log(all)
+            return{
+                ...state,
+                todoList:all
             }
 
         default:

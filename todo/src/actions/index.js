@@ -14,6 +14,14 @@ export const deleteItem = (todo) =>{
     }
 }
 
+
+export const Delete_All = 'DeleteAll';
+export const deleteAll = (todo) =>{
+    return{
+        type:Delete_All
+    }
+}
+
 export const Toggle_To_Do = 'ToggleTodo';
 export const toggleComplete = (index) =>{
     return {
